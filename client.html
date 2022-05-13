@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<Text>
+    How many clients do you wanT?
+</Text>
+
+<form onsubmit="this.sub(document.getElementById('clients').value ,document.getElementById('books').value)">
+    <input id="clients" min="0" type="number" placeholder="Clients">
+    <input min="0" id="books" type="number" placeholder="books">
+
+    <input type="submit" title="ok">
+</form>
+
+<h1 id="test">asda</h1>
+
+</body>
+
+<script>
+    function sub(client, books) {
+        var xhr = new XMLHttpRequest();
+        document.getElementById("test").innerHTML = "test"
+
+        xhr.onreadystatechange = function () {
+            if (this.readyState !== 4) {
+                return;
+            }
+            console.log("here")
+            if (this.status === 200) {
+                var data = JSON.parse(this.responseText);
+            }
+        };
+
+        xhr.open('GET', "http://localhost:3000/post?amount=" + books, true);
+        xhr.send();
+    }
+</script>
+</html>
